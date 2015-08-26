@@ -175,11 +175,11 @@ class EntriesController < ApplicationController
 		end
 
 		def favorite_counts_for_entries entry_ids
-			Hash[Favorite.where(entry_id: entry_ids).select("entry_id, count(*)").group("entry_id").map{|fav| [fav.entry_id, fav.count]}]
+			Hash[Favorite.where(entry_id: entry_ids).select("entry_id, count(*) as count").group("entry_id").map{|fav| [fav.entry_id, fav.count]}]
 		end
 
 		def reply_counts_for_entries entry_ids
-			Hash[Entry.where(parent_entry_id: entry_ids).select("parent_entry_id, count(*)").group("parent_entry_id").map{|reply| [reply.parent_entry_id, reply.count]}]
+			Hash[Entry.where(parent_entry_id: entry_ids).select("parent_entry_id, count(*) as count").group("parent_entry_id").map{|reply| [reply.parent_entry_id, reply.count]}]
 		end
 
 		def user_favorites_for_entries entry_ids
