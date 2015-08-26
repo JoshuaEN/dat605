@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
 					username = auth_hash[:info][:name].gsub(/[^A-z0-9_\-]/, '-')
 					username = nil if username.size > 20
 					username = nil if username && User.exists?(username: auth_hash[:info][:name])
-					
+
 					if display_name.nil?
 						display_name = username
 					end
@@ -60,6 +60,11 @@ class SessionsController < ApplicationController
 		else
 			flash[:success] = "You've Successfully Signed Out"
 		end
+		redirect_to root_path
+	end
+
+	def invalid_provider
+		flash[:error] = "Sorry, the provider '#{params[:provider]}' is invalid."
 		redirect_to root_path
 	end
 
