@@ -1485,7 +1485,7 @@ $(document).ready(function(){
             };
 
             ripple.className = ripple.className + ' waves-notransition';
-            ripple.setAttribute('style', convertStyle(rippleStyle));
+            $(ripple).css(rippleStyle);
             ripple.className = ripple.className.replace('waves-notransition', '');
 
             // Scale the ripple
@@ -1506,7 +1506,7 @@ $(document).ready(function(){
             rippleStyle['-o-transition-timing-function']      = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
             rippleStyle['transition-timing-function']         = 'cubic-bezier(0.250, 0.460, 0.450, 0.940)';
 
-            ripple.setAttribute('style', convertStyle(rippleStyle));
+            $(ripple).css(rippleStyle);
         },
 
         hide: function(e) {
@@ -1555,7 +1555,7 @@ $(document).ready(function(){
                     'transform': scale,
                 };
 
-                ripple.setAttribute('style', convertStyle(style));
+                $(ripple).css(style);
 
                 setTimeout(function() {
                     try {
