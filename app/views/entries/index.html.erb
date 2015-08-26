@@ -1,0 +1,38 @@
+<% if params.key? :search %>
+	<h4>Search By</h4>
+	<%= form_for search_path, method: :get do %>
+		<div class="row">
+			<div class="input-field col s12 m5">
+				<%= label_tag :taggings, "Tags", label_class_helper(params[:taggings]) %>
+				<%= text_field_tag :taggings, params[:taggings], placeholder: 'Space delimited list of tags', length: 64 %>
+			</div>
+			<div class="input-field col s12 m5">
+				<%= select_tag :category_id, options_for_select([['Any', nil]].push(*Category.all.map{|cat| [cat.category_title, cat.id]}).push(['None', -1]), params[:category_id]), prompt: false %>
+				<%= label_tag :category_id, "Category", label_class_helper(params[:category_id]) %>
+			</div>
+			<div class="input-field col s12 m2">
+				<%= submit_tag 'Search', :class => "btn", name: nil %>
+			</div>
+		</div>
+	<% end %>
+	<h4>Results</h4>
+<% end %>
+<% @entries.each do |entry| %>
+	<%= render partial: 'entry', locals: {entry: entry} %>
+<% end %>
+<%= paginate @entries %>
+
+<% if @entries.size == 0 %>
+	<% if params.key? :search %>
+		There are no entries which fit the current search criteria.
+	<% else %>
+		<%= link_to new_entry_path do %>
+			There are no entries, click here to create one!
+		<% end %>
+	<% end %>
+<% end %>
+<div id="new_entry_button" class="fixed-action-btn">
+	<%= link_to new_entry_path, :class => 'btn-floating btn-large waves-effect waves-light purple' do %>
+		<i class="material-icons">add</i>
+	<% end %>
+</div>

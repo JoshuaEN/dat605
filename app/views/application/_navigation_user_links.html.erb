@@ -1,0 +1,19 @@
+<% if current_user %>
+	<li>
+		<%= link_to '#!', class: 'dropdown-button', data: {'activates' => "current_user_dropdown_#{unique_value}"} do %>
+			<%= current_user.username %>
+			<i class="material-icons right">arrow_drop_down</i>
+		<% end %>
+	</li>
+
+	<% if current_user %>
+		<ul id="current_user_dropdown_<%=unique_value%>" class="dropdown-content">
+			<li><%= link_to 'My Settings', edit_user_path(current_user) %></li>
+			<!--<li><%#= link_to 'My Content', entry_search_path(user_id: current_user.id) %></li>-->
+			<li class="divider"></li>
+			<li><%= link_to 'Sign Out', destroy_session_path, method: :post %></li>
+		</ul>
+	<% end %>
+<% else %>
+	<li><a class="waves-effect waves-light modal-trigger" href="#sign_in_modal">Sign In</a></li>
+<% end %>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= get_title %></title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+	<header>
+
+		<nav>
+			<div class="nav-wrapper container">
+				<%= link_to "DAT605 Project", root_url, class: "brand-logo hide-on-large-only" %>
+				<a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+				<ul class="left hide-on-med-and-down">
+					<li><%= link_to "Home", root_url %></li>
+					<%= render partial: 'navigation_links' %>
+				</ul>
+				<ul class="right hide-on-med-and-down">
+					<%= render partial: 'navigation_user_links', locals: {unique_value: 'd'} %>
+				</ul>
+				<ul class="side-nav" id="mobile-nav">
+					<%= render partial: 'navigation_links' %>
+					<%= render partial: 'navigation_user_links', locals: {unique_value: 'm'} %>
+				</ul>
+			</div>		
+		</nav>
+	</header>
+
+	<main class="container">
+		<% if flash.count > 0 %>
+			<ul class="collection">
+				<% flash.each do |type, text| %>
+					<li class="collection-item dismissable"><div><%= text %> <span class="secondary-content"><i data-dismiss class="material-icons">not_interested</i></span></div></li>
+				<% end %>
+			</ul>
+		<% end %>
+		<%= yield %>
+	</main>
+
+
+	<div id="sign_in_modal" class="modal">
+		<div class="modal-content">
+			<h4>Sign In</h4>
+			<p>Please select the Service to Sign In with:</p>
+			<%= render partial: 'sign_in_options' %>
+		</div>
+		<div class="modal-footer">
+			<button class="modal-action modal-close waves-red btn-flat">Cancel</button>
+		</div>
+	</div>
+	<div id="create_entry_modal" class="modal">
+		<div class="modal-content">
+			<h4>Create an Entry</h4>
+			<p>Please select the Service to Sign In with:</p>
+			
+		</div>
+		<div class="modal-footer">
+			<button class="modal-action modal-close waves-red btn-flat">Cancel</button>
+		</div>
+	</div>
+
+	<footer class="page-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col l6 s12">
+					<h5 class="white-text">DAT605 Team One Project</h5>
+					<p class="grey-text text-lighten-4"></p>
+				</div>
+				<div class="col l4 offset-l2 s12">
+					<h5 class="white-text">Navigation</h5>
+					<ul>
+						<li><%= link_to 'Home', root_path, :class => 'grey-text text-lighten-3' %></li>
+						<li><%= link_to 'Search', search_path, :class => 'grey-text text-lighten-3' %></li>
+						<li><%= link_to 'Create', new_entry_path, :class => 'grey-text text-lighten-3' %></li>
+						<li><%= link_to 'About', about_path, :class => 'grey-text text-lighten-3' %></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<div class="container">
+				
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

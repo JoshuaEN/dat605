@@ -1,0 +1,16 @@
+<article class="content_type_<%= entry.content_instance.title.downcase %>">
+	<%= entry.content_instance.to_html %>
+	<div class="info">
+		<div class="left">
+			<%= entry_replies_link entry %>
+			<%= entry_favorites_link entry %>
+			<%= entry_tags_link entry %>
+			<%= entry_delete_link entry %>
+		</div>
+
+		<div class="right">
+			<%= entry_author_link entry %>
+		</div>
+		<div class="clear"></div>
+	</div>
+</article>

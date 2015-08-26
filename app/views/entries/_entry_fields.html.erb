@@ -1,0 +1,37 @@
+<%= form_for entry, url: entries_path(entry), method: :post, html: { autocomplete: 'off' } do |f| %>
+	
+	<%= render_form_errors f %>
+
+	<%= f.hidden_field :parent_entry_id %>
+
+	<div class="row">
+		<div class="input-field col s12">
+			<%= f.label :content, label_class_helper(f.object.content) %>
+			<%= f.text_area :content, length: 255, :class => 'materialize-textarea', placeholder: 'Link or Text' %>
+		</div>
+		<div class="input-field col s12">
+			<%= f.label :title, label_class_helper(f.object.title) %>
+			<%= f.text_field :title, length: 64, placeholder: 'Optional title' %>
+		</div>
+		<div class="input-field col s12">
+			<%= f.label :taggings, label_class_helper(f.object.taggings) %>
+			<%= f.text_field :taggings, placeholder: 'Optional space delimited list of tags', length: 64 %>
+		</div>
+
+		<% if f.object.parent_entry_id.nil? %>
+			<div class="input-field col s12">
+				<%= f.collection_select :category_id, Category.all, :id, :category_title, prompt: 'Optional category' %>
+				<%= f.label :category_id, label_class_helper(f.object.category_id) %>
+			</div>
+		<% end %>
+	</div>
+
+
+	<div class="row">
+		<div class="col s12">
+			<%= f.submit submit_text, :class => "btn" %>
+		</div>
+	</div>
+
+	<%= back_tag %>
+<% end %>

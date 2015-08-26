@@ -1,0 +1,7 @@
+<ul class="sign_in_options">
+	<% unless Rails.env.production? %>
+		<li class="left"><%= link_to 'Developer', auth_session_path(:developer, back: current_url), class: 'waves-effect waves-light btn' %></li>
+	<% end %>
+	<li class="left"><%= link_to 'Google', auth_session_path(:google_oauth2, back: current_url), class: 'waves-effect waves-light btn' %></li>
+</ul>
+<div class="clear"></div>

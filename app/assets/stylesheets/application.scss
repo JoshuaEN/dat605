@@ -1,0 +1,103 @@
+// Mixins
+@import "vendor/materialize/components/prefixer";
+@import "vendor/materialize/components/mixins";
+@import "vendor/materialize/components/color";
+
+// Variables;
+$primary-color: color("light-green", "lighten-1") !default;
+$primary-color-light: lighten($primary-color, 15%) !default;
+$primary-color-dark: darken($primary-color, 15%) !default;
+
+$secondary-color: color("light-green", "base") !default;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
+$link-color: color("light-blue", "darken-1") !default;
+
+@import "vendor/materialize/components/variables";
+
+
+// Reset
+@import "vendor/materialize/components/normalize";
+
+// components
+@import "vendor/materialize/components/global";
+//@import "vendor/materialize/components/icons-material-design";
+@import "vendor/materialize/components/grid";
+@import "vendor/materialize/components/navbar";
+@import "vendor/materialize/components/typography";
+@import "vendor/materialize/components/cards";
+@import "vendor/materialize/components/tooltip";
+@import "vendor/materialize/components/buttons";
+@import "vendor/materialize/components/dropdown";
+@import "vendor/materialize/components/waves";
+@import "vendor/materialize/components/modal";
+@import "vendor/materialize/components/collapsible";
+@import "vendor/materialize/components/materialbox";
+@import "vendor/materialize/components/form";
+@import "vendor/materialize/components/table_of_contents";
+@import "vendor/materialize/components/sideNav";
+
+@import "entries";
+
+// Sticky Footer
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+// Dismissable
+[data-dismiss] {
+	cursor: pointer;
+}
+
+// Floating new button.
+#new_entry_button {
+	bottom: 24px;
+	right: 24px;
+}
+
+// Form errors
+
+label.field_with_errors {
+	color: $error-color;
+}
+
+// Style Tweaks
+
+nav {
+	margin-bottom: 10px;
+	box-shadow: none;
+}
+
+// Float clear
+.clear {
+	clear: both;
+}
+
+// Pagination
+
+.pagination {
+	@extend .right;
+	margin-top: 10px;
+
+	li {
+		padding: 0;
+
+		a {
+			padding: 0 10px;
+		}
+	}
+}
+
+// Sign in options 
+ul.sign_in_options {
+	li {
+		margin-right: 1rem;
+		margin-bottom: 1rem;
+	}
+}

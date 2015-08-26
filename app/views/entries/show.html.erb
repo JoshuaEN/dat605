@@ -1,0 +1,41 @@
+<% if @entry.title.present? %>
+	<% provide :title, @entry.title %>
+<% end %>
+
+<% if @parent.present? %>
+	<article class="content_type_text">
+		<div class="left">
+			<%= link_to 'Entries\' Parent', entry_path(@parent), :class => 'btn-flat waves-effect waves-green' %>
+			<%= entry_replies_link @parent %>
+			<%= entry_favorites_link @parent %>
+			<%= entry_tags_link @parent %>
+			<%= entry_delete_link @parent %>
+		</div>
+
+		<div class="right">
+			<%= entry_author_link @parent %>
+		</div>
+		<div class="clear"></div>
+	</article>
+	<div class="indent">
+<% end %>
+<%= render partial: 'entry', locals: {entry: @entry} %>
+<div class="indent">
+	<article class="content_type_form">
+		<%= render partial: 'entry_fields', locals: {entry: Entry.new(parent_entry_id: @entry.id), submit_text: 'Reply'} %>
+	</article>
+	<% @entries.each do |entry| %>
+		<%= render partial: 'entry', locals: {entry: entry} %>
+	<% end %>
+	<%= paginate @entries %>
+</div>
+
+<div id="new_entry_button" class="fixed-action-btn">
+	<%= link_to new_entry_path(parent_entry_id: @entry.id), :class => 'btn-floating btn-large waves-effect waves-light purple' do %>
+		<i class="material-icons">add</i>
+	<% end %>
+</div>
+
+<% if @parent.present? %>
+	</div>
+<% end %>

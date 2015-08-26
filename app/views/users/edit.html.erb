@@ -1,0 +1,48 @@
+<% provide :title, "Edit User" %>
+
+<%= form_for @user, url: user_path(@user), method: :put, html: { autocomplete: 'off' } do |f| %>
+	
+	<%= render_form_errors f %>
+
+	<div class="row">
+		<div class="input-field col s4">
+			<%= f.label :username, label_class_helper(f.object.username) %>
+			<%= f.text_field :username, length: 20 %>
+		</div>
+		<div class="input-field col s4">
+			<%= f.label :display_name, label_class_helper(f.object.display_name) %>
+			<%= f.text_field :display_name, length: 30 %>
+		</div>
+	</div>
+
+	<% if current_user.is_admin == true %>
+		<div class="row">
+			<div class="input-field col s12">
+				<%= f.check_box :is_admin, :class => "filled-in" %>
+				<%= f.label :is_admin %>
+			</div>
+			<% if f.object.is_banned == true %>
+				<div class="input-field col s12">
+					<%= f.check_box :is_banned, :class => "filled-in" %>
+					<%= f.label :is_banned %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+
+	<div class="row">
+		<div class="input-field col s12">
+			<%= f.submit 'Save Changes', :class => "btn" %>
+		</div>
+		<% if current_user.is_admin == true && f.object.is_banned == false %>
+			<div class="input-field col s12">
+				<%= link_to 'Ban Account', ban_user_path(@user), method: :post, data: {confirm: 'Are you sure; all created entries and favorites will be permanently destroyed.'}, :class => 'btn red' %>
+			</div>
+		<% end %>
+		<div class="input-field col s12">
+			<%= link_to 'Delete Account', user_path(@user), method: :delete, data: {confirm: 'Are you sure; all created entries, favorites, and any other associated information will be permanently destroyed.'}, :class => 'btn red' %>
+		</div>
+	</div>
+
+	<%= back_tag %>
+<% end %>

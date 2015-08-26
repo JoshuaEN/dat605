@@ -1,0 +1,25 @@
+article {
+	@extend .card-panel;
+	@extend .hoverable;
+
+	padding: 0;
+	position: relative;
+
+	&.content_type_text > p, &.content_type_url > a, &.content_type_form {
+		padding: 5px 20px;
+	}
+
+	& video, & img {
+		display: block;
+	}
+
+	div.info {
+		.btn, .btn-flat {
+			padding: 0 20px;
+		}
+	}
+}
+
+.indent {
+	margin-left: 20px;
+}
