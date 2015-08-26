@@ -192,7 +192,7 @@ class EntriesController < ApplicationController
 
 		def tags_for_entries entry_ids
 			entry_tags = {}
-			Tag.where(entry_id: entry_ids).each do |tag|
+			Tag.where(entry_id: entry_ids).order('id asc').each do |tag|
 				unless entry_tags.key? tag.entry_id
 					entry_tags[tag.entry_id] = []
 				end
