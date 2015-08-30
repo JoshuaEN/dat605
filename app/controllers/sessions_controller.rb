@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 				if auth_hash[:info][:name]
 					username = auth_hash[:info][:name].gsub(/[^A-z0-9_\-]/, '-')
 					username = nil if username.size > 20
-					username = nil if username && User.exists?(username: auth_hash[:info][:name])
+					username = nil if username && User.exists?(username: username)
 
 					if display_name.nil?
 						display_name = username
